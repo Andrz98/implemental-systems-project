@@ -3,7 +3,7 @@ import { WordTag } from '../../atoms'
 
 export default function CardWordList({
   words,
-  isDone
+  isDone,
   maxWords,
   onRemoveWord,
 }) {
@@ -25,7 +25,7 @@ export default function CardWordList({
         />
       ))}
       {words.length === 0 && !isDone && (
-        <span className="text-sm text-gray-300 italic">
+        <span className="text-sm text-surface-300 italic">
           Añade hasta {maxWords} palabras…
         </span>
       )}

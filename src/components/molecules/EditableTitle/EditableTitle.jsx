@@ -44,8 +44,8 @@ export default function EditableTitle({ value, onChange }) {
       }}
       className="
         font-bold text-lg
-        bg-transparent border-b-2 border-indigo-300
-        text-gray-800 outline-none
+        bg-transparent border-b-2 border-accent/40
+        text-surface-800 outline-none
         px-0 py-0 w-full
       "
       maxLength={40}
@@ -54,8 +54,8 @@ export default function EditableTitle({ value, onChange }) {
     <h2
       onClick={() => setEditing(true)}
       className="
-        font-bold text-lg text-gray-800
-        cursor-text hover:text-indigo-500
+        font-bold text-lg text-surface-800
+        cursor-text hover:text-accent
         transition-colors truncate
       "
       title="Clic para editar"

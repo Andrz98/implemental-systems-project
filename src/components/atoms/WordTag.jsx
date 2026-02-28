@@ -8,7 +8,7 @@ export default function WordTag({ word, onRemove, disabled = false }) {
       className={`
         inline-flex items-center gap-1
         px-2.5 py-1 rounded-md text-sm
-        bg-indigo-100 text-indigo-700 font-medium
+        bg-accent-muted text-accent-dark font-medium
         ${disabled ? 'opacity-60' : ''}
       `}
     >
@@ -19,7 +19,7 @@ export default function WordTag({ word, onRemove, disabled = false }) {
           className="
             ml-0.5 w-4 h-4 rounded-full
             flex items-center justify-center
-            text-indigo-400 hover:text-indigo-600 hover:bg-indigo-200/50
+            text-accent/50 hover:text-accent hover:bg-accent/10
             transition-colors cursor-pointer
           "
           aria-label={`Eliminar "${word}"`}

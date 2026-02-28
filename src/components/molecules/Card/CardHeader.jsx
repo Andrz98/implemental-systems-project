@@ -12,7 +12,7 @@ export default function CardHeader({
 }) {
   return (
     <div className="flex items-center justify-between mb-3">
-      <span className="text-xs text-gray-400 font-medium tracking-wide uppercase">
+      <span className="text-xs text-surface-400 font-medium tracking-wide uppercase">
         {isDone
           ? `${wordCount} palabra${wordCount !== 1 ? 's' : ''}`
           : `${wordCount}/${maxWords}`

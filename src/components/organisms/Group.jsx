@@ -11,8 +11,8 @@ export default function Group({ group }) {
 
   return (
     <section className="
-      bg-gray-100 rounded-2xl p-5
-      shadow
+      bg-surface-100 rounded-2xl p-5
+      shadow-group
       flex flex-col gap-4
       min-w-[300px] max-w-[380px] w-full
     ">
