@@ -15,17 +15,17 @@ export default function CardInput({
   // Necesito crear la ref que debo conectar al Input real del DOM
   const inputRef = useRef(null)
 
-  const handleAddWord = () => {
+  const handleSubmit = () => {
     onAdd()
     inputRef.current?.focus()
   }
 
    // En esta función detectamos cuando el usuario pulsa Enter en el input.
-  // Si es Enter, prevenimos el comportamiento nativo del navegador de recargar la página y llamamos a handleAddWord para añadir la palabra.
+  // Si es Enter, prevenimos el comportamiento nativo del navegador de recargar la página y llamamos a handleSubmit para añadir la palabra.
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault()
-      handleAddWord()
+      handleSubmit()
     }
   }
 
@@ -46,7 +46,7 @@ export default function CardInput({
       <Button
         variant="primary"
         size="sm"
-        onClick={handleAddWord}
+        onClick={handleSubmit}
         disabled={disabled}
         className="shrink-0"
       >
