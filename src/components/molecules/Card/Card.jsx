@@ -20,4 +20,44 @@ export default function Card({ card, groupId, onAddWord, onRemoveWord, onRemoveC
     setInputValue('')
   }
 
-  
+  return (
+    <div
+      data-card-id={card.id}
+      className={`
+        relative bg-white rounded-xl p-4
+        shadow-sm hover:shadow-md
+        transition-all duration-200
+        ${card.done ? 'ring-1 ring-indigo-200' : ''}
+      `}
+    >
+      {/* En la cabecera, se muestra el contenedor de palabras y los botones de acción y pasamos nuestras props primitivas */}
+      <CardHeader
+        wordCount={card.words.length}
+        maxWords={MAX_WORDS}
+        isDone={card.done}
+        onToggleDone={() => onToggleDone(groupId, card.id)}
+        onRemove={() => onRemoveCard(groupId, card.id)}
+      />
+
+      {/* En este apartado, se encuentra la lista de palabras que se renderiza como un WordTag */}
+      <CardWordList
+        words={card.words}
+        isDone={card.done}
+        maxWords={MAX_WORDS}
+        onRemoveWord={(index) => onRemoveWord(groupId, card.id, index)} {/* onRemoveWord, recibe solo el índice porque Card.jsx ya inserta groupId y card.id en                                                               la función que pasa al hijo */}
+      />
+
+      {/* En este apartado, el Input solo se renderiza si la tarjeta no está finalizada
+          y no ha alcanzado el límite de palabras. */}
+      {!card.done && !isFull && (
+        <CardInput
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onAdd={handleAddWord}
+          disabled={!inputValue.trim()}
+        />
+      )}
+    </div>
+  )
+
+}
