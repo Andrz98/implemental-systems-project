@@ -1,3 +1,5 @@
 export { default as Button } from './Button'
 export { default as Input } from './Input'
 export { default as WordTag } from './WordTag'
+export { default as ConnectionDot } from './ConnectionDot'
+export { default as ConnectionLine } from './ConnectionLine'
