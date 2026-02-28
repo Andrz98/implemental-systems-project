@@ -3,18 +3,12 @@
 import { Card, EditableTitle } from '../molecules'
 import { Button } from '../atoms'
 import { X, Plus } from 'lucide-react'
+import useBoard from '../../context/useBoard'
 
 // La función Group recibe las props desde el padre y será por medio del componente que maneje el contexto global
-export default function Group({
-  group,
-  onRenameGroup,
-  onRemoveGroup,
-  onAddCard,
-  onAddWord,
-  onRemoveWord,
-  onRemoveCard,
-  onToggleDone,
-}) {
+export default function Group({ group }) {
+  const { addCard, removeGroup, renameGroup } = useBoard()
+
   return (
     <section className="
       bg-gray-100 rounded-2xl p-5
@@ -27,29 +21,25 @@ export default function Group({
       <div className="flex items-center justify-between gap-2">
         <EditableTitle
           value={group.name}
-          onChange={(name) => onRenameGroup(group.id, name)}
+          onChange={(name) => renameGroup(group.id, name)}
         />
 
         <Button
           variant="danger"
           size="sm"
-          onClick={() => onRemoveGroup(group.id)}
+          onClick={() => removeGroup(group.id)}
         >
           <X size={14} />
         </Button>
       </div>
 
       {/* 2. Lista de tarjetas que tenemos en el grupo */}
-      <div className="flex flex-col- gap-3">
+      <div className="flex flex-col gap-3">
         {group.cards.map((card) => (
           <Card
             key={card.id}
             card={card}
             groupId={group.id}
-            onAddWord={onAddWord}
-            onRemoveWord={onRemoveWord}
-            onRemoveCard={onRemoveCard}
-            onToggleDone={onToggleDone}
           />
         ))}
       </div>
@@ -58,7 +48,7 @@ export default function Group({
       <Button
         variant="secondary"
         size="md"
-        onClick={() => onAddCard(group.id)}
+        onClick={() => addCard(group.id)}
         className="w-full justify-center"
       >
         <Plus size={16} />
