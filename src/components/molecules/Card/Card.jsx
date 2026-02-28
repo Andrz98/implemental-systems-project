@@ -10,9 +10,26 @@ const MAX_WORDS = 5
 
 // Defino cards con props y funciones que llamaré desde el contexto global para mantener la molécula desacoplada.
 export default function Card({ card, groupId }) {
-  const { addWord, removeWord, removeCard, toggleCardDone } = useBoard()
+  const {
+    addWord,
+    removeWord,
+    removeCard,
+    toggleCardDone,
+    connectingFrom,
+    startConnection,
+    finishConnection,
+    connections,
+  } = useBoard()
+
   const [inputValue, setInputValue] = useState('')
   const isFull = card.words.length >= MAX_WORDS // lo utilizo para calcular y evaluar si en el componente ya hay 5 palabras, utilziando la propiedad nativa .lenght de JavaScript
+
+  // Variables derivadas para gestionar el estado de conexión
+  const isConnecting = connectingFrom !== null
+  const isSource = connectingFrom === card.id
+  const connectionCount = connections.filter(
+    c => c.fromCardId === card.id || c.toCardId === card.id
+  ).length
 
   // Necesito una constante que se salga de la función en 3 casos distintos: Texto vacío (!trimmed), (isFull), (card.done)
   const handleAddWord = () => {
@@ -20,6 +37,18 @@ export default function Card({ card, groupId }) {
     if (!trimmed || isFull || card.done) return
     addWord(groupId, card.id, trimmed)
     setInputValue('')
+  }
+
+  // Gestiona el clic en ConnectionDot: si ya hay conexión en curso, la completa.
+  // Si no, la inicia. stopPropagation evita que el clic se propague al contenedor.
+  const handleConnectionClick = (e) => {
+    e.stopPropagation()
+    if (isSource) return
+    if (isConnecting) {
+      finishConnection(card.id)
+    } else {
+      startConnection(card.id)
+    }
   }
 
   return (
@@ -30,7 +59,10 @@ export default function Card({ card, groupId }) {
         shadow-card hover:shadow-card-hover
         transition-all duration-200
         ${card.done ? 'ring-1 ring-accent/20' : ''}
+        ${isSource ? 'ring-2 ring-connect shadow-lg shadow-connect/10' : ''}
+        ${isConnecting && !isSource && card.done ? 'ring-1 ring-connect/40 cursor-pointer' : ''}
       `}
+      onClick={isConnecting && !isSource && card.done ? handleConnectionClick : undefined}
     >
       {/* En la cabecera, se muestra el contenedor de palabras y los botones de acción y pasamos nuestras props primitivas */}
       <CardHeader
@@ -39,6 +71,10 @@ export default function Card({ card, groupId }) {
         isDone={card.done}
         onToggleDone={() => toggleCardDone(groupId, card.id)}
         onRemove={() => removeCard(groupId, card.id)}
+        isConnecting={isConnecting}
+        isSource={isSource}
+        connectionCount={connectionCount}
+        onConnectionClick={handleConnectionClick}
       />
 
       {/* En este apartado, se encuentra la lista de palabras que se renderiza como un WordTag.
