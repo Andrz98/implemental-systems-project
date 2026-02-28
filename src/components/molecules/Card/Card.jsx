@@ -5,7 +5,7 @@ import { Button, Input, WordTag } from '../atoms'
 // Defino constante de valor, para el número máximo de palabras que se pueden añadir a la tarjeta.
 const MAX_WORDS = 5
 
-// Defino cards con funciones que llamaré desde el contexto global para mantener la molécula desacoplada.
+// Defino cards con props y funciones que llamaré desde el contexto global para mantener la molécula desacoplada.
 export default function Card({ card, groupId, onAddWord, onRemove, onRemoveCard, onToggleDone }) {
   const [inputValue, setInputValue] = useState('')
   const inputRef = useRef(null)
