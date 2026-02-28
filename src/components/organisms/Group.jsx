@@ -11,10 +11,10 @@ export default function Group({ group }) {
 
   return (
     <section className="
-      bg-surface-100 rounded-2xl p-5
-      shadow-group
-      flex flex-col gap-4
-      min-w-[300px] max-w-[380px] w-full
+        bg-surface-100 rounded-2xl p-5
+        shadow-group
+        flex flex-col gap-4
+        w-full
     ">
 
       {/* 1. Cabecera del grupo: Aquí tenemos Título editable y botón de limpiar */}

@@ -32,8 +32,8 @@ export default function Board() {
       {/* Tablero principal */}
       <main className="flex-1 px-6 py-8">
         <div className="
-          max-w-7xl mx-auto
-          flex flex-wrap gap-6
+          max-w-6xl mx-auto
+          grid grid-cols-2 gap-x-96 gap-y-6
           items-start
         ">
           {groups.map((group) => (
@@ -44,7 +44,7 @@ export default function Board() {
           <button
             onClick={() => addGroup()}
             className="
-              min-w-[300px] max-w-[380px] w-full
+              w-full
               border-2 border-dashed border-surface-300
               rounded-2xl p-8
               flex flex-col items-center justify-center gap-2
