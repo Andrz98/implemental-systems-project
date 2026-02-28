@@ -53,6 +53,7 @@ export default function Card({ card, groupId }) {
 
   return (
     <div
+      id={card.id}
       data-card-id={card.id}
       className={`
         relative bg-white rounded-xl p-4
